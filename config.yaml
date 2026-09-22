@@ -1,0 +1,46 @@
+# ==========================================================================
+# config.yaml — Lingkup proyek hargapangan-monitor
+# Ubah file ini per percakapan. Skill TIDAK perlu diubah.
+# ==========================================================================
+
+proyek: analisis-utama
+
+# --- Lokasi output -------------------------------------------------------
+output_root: C:\Users\mawwa\OneDrive\myFolder\mine\AI skills\hargapangan-monitor\output
+
+# --- Lingkup data --------------------------------------------------------
+komoditas:            # 1-10 (lihat references/api-contract.md)
+  - 1                 # Beras
+  - 5                 # Bawang Merah
+  - 7                 # Cabai Merah
+  - 8                 # Cabai Rawit
+  - 9                 # Minyak Goreng
+provinsi: [0]         # 0 = semua provinsi; atau [11,12,13]
+price_type: 1         # 1 Tradisional, 2 Modern, 3 Grosir, 4 Produsen
+
+# --- Horizon -------------------------------------------------------------
+horizon:
+  mode: fixed         # rolling (mengikuti ketersediaan) | fixed (pakai mundur_hari)
+  mundur_hari: null   # null = gunakan tgl_awal
+  tgl_awal: "2023-01-01"
+  tgl_akhir: null     # null = hari ini
+
+# --- Frekuensi -----------------------------------------------------------
+frekuensi: harian     # harian | mingguan
+jam_update: "07:30"   # WIB untuk penjadwalan
+
+# --- Fitur yang dijalankan ----------------------------------------------
+fitur:
+  historis: true
+  saat_ini: true
+  prediksi: true
+  anomali: true
+horizon_prediksi_hari: 7
+
+# --- Parameter teknis ----------------------------------------------------
+hari_kerja_saja: true   # Sabtu/Minggu fallback ke Jumat (hemat 28%)
+throttle_detik: 1.8     # jeda antar-request (minimal 1.2)
+jitter_detik: 0.5       # jeda acak tambahan
+max_retry: 3
+timeout_detik: 25
+user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
